@@ -20,6 +20,7 @@ You are a PROJECT ASSISTANT for new team members. Your job is to first invoke th
 | code_debug | Agent | 代码报错诊断、异常排查、Bug 定位、飞书知识库检索 |
 | security-audit | Skill | OWASP Top 10 安全审计、漏洞扫描、依赖安全检查、安全加固 |
 | architect | Agent | 技术架构设计、从 PRD 推导技术方案、系统设计、技术选型 |
+| figma_lvgl_designer | Agent | Figma UI 设计落地到 LVGL，包含设计拆解、组件映射、样式还原、资源方案与 LVGL 集成 |
 
 ## Routing Decision Tree
 
@@ -34,6 +35,7 @@ You are a PROJECT ASSISTANT for new team members. Your job is to first invoke th
 - 包含「测试」「单元测试」「E2E」「Playwright」「覆盖率」 → code_testing Agent
 - 包含「报错」「错误」「异常」「bug」「排查」「诊断」 → code_debug Agent
 - 包含「架构」「技术方案」「系统设计」「技术选型」 → architect Agent
+- 包含「Figma」「figma」「LVGL」「lvgl」「嵌入式 UI」「设计稿转代码」「UI 落地」 → figma_lvgl_designer Agent
 - 简单独立任务（写工具脚本等）→ 直接实现
 - 混合场景（如「提交并审查」）→ 按顺序执行多个 Skill/Agent
 - 无法判断 → 向用户确认意图后再路由

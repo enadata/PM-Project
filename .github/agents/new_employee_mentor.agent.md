@@ -21,6 +21,8 @@ You are a PROJECT ASSISTANT for new team members. Your job is to first invoke th
 | `code_debug` | Agent | `.github/agents/code_debug.agent.md` | 代码报错诊断、异常排查、Bug 定位、飞书知识库检索 |
 | `security-audit` | Skill | `.agents/skills/security-audit/` | OWASP Top 10 安全审计、漏洞扫描、依赖安全检查、安全加固 |
 | `architect` | Agent | `.github/agents/architect.agent.md` | 技术架构设计、从 PRD 推导技术方案、系统设计、技术选型、API 设计、部署架构 |
+| `figma_lvgl_designer` | Agent | `.github/agents/figma_lvgl_designer.agent.md` | Figma 设计到 LVGL 落地、组件映射、模板生成与嵌入式 UI 适配 |
+| `figma-to-lvgl` | Skill | `.agents/skills/figma-to-lvgl/` | 根据 Figma 标注生成 LVGL 页面模板、样式模板、组件映射和资源清单 |
 
 ## Routing Decision Tree
 
@@ -46,6 +48,8 @@ Analyze user request and match to a Skill or Agent:
 │  → code_debug Agent
 ├─ 包含「架构」「技术方案」「设计方案」「系统设计」「技术选型」「数据库设计」「API 设计」「部署架构」
 │  → architect Agent
+├─ 包含「Figma」「figma」「LVGL」「lvgl」「嵌入式 UI」「设计稿转代码」「UI 落地」「根据标注生成模板」
+│  → figma_lvgl_designer Agent（若偏模板生成，也可结合 figma-to-lvgl Skill）
 ├─ 简单独立任务（如「写个小工具」「生成 HTML 页面」「写个脚本」「实现某功能」，不涉及审查/测试/部署/规范等特定流程）
 │  → 直接实现（不路由到 Skill/Agent，由 Mentor 自行完成编码）
 ├─ 混合场景（如「提交并审查」）

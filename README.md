@@ -39,6 +39,7 @@
 │   │   ├── code_review.agent.md
 │   │   ├── code_testing.agent.md
 │   │   ├── designer.agent.md
+│   │   ├── figma_lvgl_designer.agent.md
 │   │   ├── new_employee_mentor.agent.md
 │   │   ├── planning.agent.md
 │   │   ├── pr_review_submit.agent.md
@@ -51,6 +52,7 @@
 │       ├── code-standards-check/
 │       ├── coding-standards/
 │       ├── feishu-docs/
+│       ├── figma-to-lvgl/
 │       ├── github-publish/
 │       ├── microservices/
 │       ├── modao-prototype/
@@ -80,6 +82,7 @@
 | code_testing | 负责单元、集成、UI 和 E2E 测试 |
 | code_docs | 生成 README、注释、API 文档和设计说明 |
 | designer | 把 PRD 或线框升级为高保真原型 |
+| figma_lvgl_designer | 把 Figma 标注和设计稿映射为可集成的 LVGL 页面模板与样式方案 |
 | gate_review | Stage-Gate 评审门，在 PRD/架构/上线前执行 Go/No-Go 决策 |
 | post_launch_review | 上线复盘，收集埋点数据和用户反馈，输出迭代建议 |
 | ui_testing | 使用 Playwright 做浏览器自动化验证 |
@@ -98,6 +101,7 @@
 | github-publish | 管理提交、推送、PR 与发布流程 |
 | microservices | 微服务设计、治理与部署 |
 | feishu-docs | 对接飞书文档查询与同步 |
+| figma-to-lvgl | 把 Figma 标注转换为 LVGL 页面模板、样式模板和资源清单 |
 | modao-prototype | 生成并导入墨刀原型 |
 | prototype-design | 从低保真升级高保真原型 |
 | playwright-testing | 沉淀 Playwright UI 测试规范 |

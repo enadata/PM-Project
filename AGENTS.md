@@ -38,6 +38,7 @@
 | `code_review` | 代码审查（MUST/SHOULD/NIT 分级） | read-only |
 | `code_testing` | 代码测试（单元/集成/UI/E2E） | workspace-write |
 | `designer` | 高保真原型设计（基于 PRD + wireframe） | workspace-write |
+| `figma_lvgl_designer` | Figma UI 设计落地到 LVGL（设计拆解、组件映射、模板生成与嵌入式适配） | workspace-write |
 | `gate_review` | Stage-Gate 评审门（PRD/架构/上线三个 Gate） | read-only |
 | `new_employee_mentor` | 新员工导师（路由分发器，分析意图后路由到合适的 Agent） | workspace-write |
 | `planning` | 任务规划与上下文研究（只研究不执行） | read-only |
@@ -57,6 +58,7 @@ Skill 存放在 `.agents/skills/`（指向 `.github/skills/` 的符号链接）�
 | `code-standards-check` | 代码规范审计 |
 | `coding-standards` | 编码规范集 |
 | `feishu-docs` | 飞书文档查询/操作 (MCP) |
+| `figma-to-lvgl` | Figma 标注到 LVGL 代码模板生成 |
 | `github-publish` | GitHub 发布工作流 |
 | `microservices` | 微服务架构/部署规范 |
 | `modao-prototype` | 墨刀原型导入 (MCP) |

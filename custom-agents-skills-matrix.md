@@ -20,6 +20,7 @@
 | `planning` | `.codex/agents/planning.toml` | `.github/agents/planning.agent.md` | 上下文研究与路由建议 | 执行前分析、复杂任务梳理 |
 | `new_employee_mentor` | `.codex/agents/new_employee_mentor.toml` | `.github/agents/new_employee_mentor.agent.md` | 统一入口路由器 | 不确定该用哪个 Agent/Skill 时 |
 | `designer` | `.codex/agents/designer.toml` | `.github/agents/designer.agent.md` | 高保真原型设计 | 从 PRD / wireframe 升级高保真原型 |
+| `figma_lvgl_designer` | `.codex/agents/figma_lvgl_designer.toml` | `.github/agents/figma_lvgl_designer.agent.md` | Figma 到 LVGL 的 UI 设计落地 | 根据设计稿/标注生成 LVGL 页面模板、样式映射和资源方案 |
 | `architect` | `.codex/agents/architect.toml` | `.github/agents/architect.agent.md` | 架构设计 | 从 PRD 产出技术架构文档 |
 | `gate_review` | `.codex/agents/gate_review.toml` | `.github/agents/gate_review.agent.md` | Stage-Gate 审核 | PRD 评审、架构评审、上线评审 |
 | `code_debug` | `.codex/agents/code_debug.toml` | `.github/agents/code_debug.agent.md` | 故障诊断 | 报错分析、未知异常排查 |
@@ -36,6 +37,7 @@
 | --- | --- | --- | --- |
 | `requirement-doc` | `.agents/skills/requirement-doc/` | 生成 PRD 与低保真 wireframe | 上游：`pm_assistant` / `requirement_analyst`；下游：`gate_review` |
 | `prototype-design` | `.agents/skills/prototype-design/` | 生成高保真原型 | 上游：`requirement-doc`；下游：`architect` |
+| `figma-to-lvgl` | `.agents/skills/figma-to-lvgl/` | 根据 Figma 标注生成 LVGL 页面模板、样式模板和资源清单 | 上游：`designer` / `figma_lvgl_designer`；下游：LVGL UI 开发 |
 | `architect` | `.agents/skills/architect/` | 生成架构文档 | 上游：PRD；下游：`requirement-to-issues` |
 | `requirement-to-issues` | `.agents/skills/requirement-to-issues/` | 将 PRD 拆分为 GitHub Issues | 上游：`requirement-doc` / `architect` |
 | `github-publish` | `.agents/skills/github-publish/` | 提交、分支、PR、合并 | 文档、代码、原型的发布闭环 |
