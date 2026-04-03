@@ -145,7 +145,7 @@ cd PM-Project
 
 ### 1. 配置 Remote Figma MCP Server
 
-在 `/home/runner/work/PM-Project/PM-Project/.codex/config.toml` 中配置 `mcp_servers.figma`：
+在 `.codex/config.toml` 中配置 `mcp_servers.figma`：
 
 - 使用 **remote MCP server** 模式接入
 - 通过环境变量 `FIGMA_MCP_TOKEN` 注入访问令牌
