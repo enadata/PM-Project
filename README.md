@@ -132,13 +132,13 @@ cd PM-Project
 如果你想在**任意已有项目**里直接复用本仓库的 Agents / Skills，可以先在目标项目目录执行基础接入命令：
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/feature/codex-cli-adaptation/bootstrap-pm-project.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/project/codex-cli-adaptation/bootstrap-pm-project.sh)
 ```
 
 如果目标项目中已存在同名文件或目录，再按需追加 `--force` 允许脚本先备份再覆盖：
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/feature/codex-cli-adaptation/bootstrap-pm-project.sh) --force
+bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/project/codex-cli-adaptation/bootstrap-pm-project.sh) --force
 ```
 
 `--force` 会把冲突路径移动到 `.pm-project-backup/时间戳/` 后再继续执行，建议先确认目标项目中没有未处理的重要改动。
@@ -148,12 +148,12 @@ bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/feature/c
 如需预演执行过程，可运行：
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/feature/codex-cli-adaptation/bootstrap-pm-project.sh) --dry-run
+bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/project/codex-cli-adaptation/bootstrap-pm-project.sh) --dry-run
 ```
 
 脚本会先执行以下接入动作：
 
-- 使用 `git submodule add -b feature/codex-cli-adaptation https://github.com/enadata/PM-Project .agent-project`
+- 使用 `git submodule add -b project/codex-cli-adaptation https://github.com/enadata/PM-Project .agent-project`
 - 将本仓库作为目标项目内的 `.agent-project` submodule
 
 然后为目标项目创建以下软链接：
