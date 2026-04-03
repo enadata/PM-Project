@@ -19,24 +19,48 @@ description: "Figma 标注到 LVGL 代码模板生成 Skill。根据 Figma 链�
 
 ## 适用输入
 
+- 通过 Remote Figma MCP Server 读取的结构化设计数据（优先）：
+  - file key / file id
+  - frame / node id
+  - design tokens（Variables / Styles）
+  - export assets 列表
 - Figma 链接
 - Figma 导出的截图、标注图、间距标注、切图说明
 - 设计 token：颜色、字体、圆角、阴影、间距
 - 目标设备信息：分辨率、色深、触控/按键输入方式
 - LVGL 工程路径、版本信息和现有 UI 目录
 
-若无法直接访问 Figma，至少要求用户提供截图或导出标注。
+推荐输入优先级：
+
+1. **Figma MCP 结构化输入**：适合需要稳定提取节点树、token、组件和资源清单的场景
+2. **Figma 链接 + 补充说明**：适合人工辅助解析
+3. **截图 / 标注图 / token 文档**：作为 MCP 不可用时的降级输入
+
+若无法直接访问 Figma MCP 或 Figma 链接，至少要求用户提供截图或导出标注。
 
 ## 工作流
 
 ### 步骤 1：确认上下文
 
-1. 识别输入类型：Figma 链接 / 标注图 / 截图 / token 文档
-2. 识别目标环境：
+1. 识别输入类型：Figma MCP 结构化数据 / Figma 链接 / 标注图 / 截图 / token 文档
+2. 若已配置 Remote Figma MCP Server，优先通过 MCP 获取：
+   - 文件元数据（file key、页面名、最后更新时间）
+   - 目标页面与 frame / node 树
+   - 组件实例、Variables、Styles
+   - 可导出资源列表（图片、图标、字体依赖说明）
+3. 建立本次任务的输入清单：
+   - `file_key`
+   - `frame_id` / `node_id`
+   - `export_assets[]`
+   - `design_tokens`
+   - `lvgl_version`
+   - `target_resolution`
+   - `ui_path`
+4. 识别目标环境：
    - LVGL 版本（8.x / 9.x）
    - 屏幕分辨率、色深
    - 输入方式（触摸 / 按键 / 编码器）
-3. 搜索现有工程中的 UI 约定：
+5. 搜索现有工程中的 UI 约定：
    - `ui/`、`src/ui/`、`lvgl/`、`components/`、`screens/` 等目录
    - 已有主题、样式、页面构建函数、公共组件
 
@@ -50,6 +74,13 @@ description: "Figma 标注到 LVGL 代码模板生成 Skill。根据 Figma 链�
 - 文本内容、图标、图片资源
 - 组件状态：default / pressed / focused / disabled / checked
 - 动效或过渡意图
+
+若输入来自 Figma MCP，还需要额外整理：
+
+- 页面 / Frame 层级树
+- 可复用组件与实例关系
+- Variables / Styles 到 token 的映射关系
+- 可导出资源命名、格式和尺寸约束
 
 输出《标注提取摘要》：
 
@@ -67,6 +98,13 @@ description: "Figma 标注到 LVGL 代码模板生成 Skill。根据 Figma 链�
 - token → LVGL 样式常量映射表
 - 状态样式映射表
 - 资源清单（图片、字体、图标）
+
+推荐把 MCP 提取结果组织为以下中间层，再进入 LVGL 模板生成：
+
+- **结构层**：page / frame / node → screen / container / widget
+- **样式层**：variables / styles → color / radius / spacing / typography tokens
+- **资源层**：export assets → 图片、图标、字体清单
+- **交互层**：节点状态 / 组件状态 → LVGL state style / 事件接口
 
 若出现 LVGL 难以直接实现的效果：
 
@@ -110,6 +148,37 @@ ui/
 - 组件复用建议
 - 资源压缩与字体裁剪建议
 
+## Figma MCP 接入约定
+
+当仓库已配置 `.codex/config.toml` 中的 `mcp_servers.figma` 时，默认执行以下优先链路：
+
+```text
+Figma 设计稿
+→ Remote Figma MCP Server
+→ 提取 frame / node tree / variables / styles / export assets
+→ figma-to-lvgl Skill
+→ LVGL 页面模板 / 样式模板 / 组件映射表 / 资源清单
+```
+
+建议在任务输入中明确提供：
+
+- `file_key`：Figma 文件唯一标识
+- `frame_id` 或 `node_id`：本次导出的页面或组件范围
+- `export_assets`：需要导出的图片 / 图标资源
+- `design_tokens`：若需覆盖或补充 token，可显式传入
+- `lvgl_version`：必须明确 8.x 或 9.x
+- `target_resolution`：例如 `480x480`
+- `ui_path`：目标 LVGL 工程目录
+
+若 MCP 不可用，按以下降级链路处理：
+
+```text
+Figma 链接 / 截图 / 标注
+→ 人工提取结构与 token
+→ figma-to-lvgl Skill
+→ LVGL 输出物
+```
+
 ## 模板质量检查清单
 
 - [ ] 页面层级和标注结构一致
@@ -123,6 +192,7 @@ ui/
 ## 快速命令
 
 - **"根据这个 Figma 标注生成 LVGL 模板"**：执行完整流程
+- **"通过 Figma MCP 读取 file key 并生成 LVGL 模板"**：优先使用 Remote Figma MCP Server
 - **"只要页面骨架代码"**：只输出 screen/container 与基础组件代码
 - **"整理 design token 到 LVGL 样式"**：只输出 token 和样式模板
 - **"给我一个可接入现有工程的 LVGL 页面模板"**：优先遵循仓库内结构生成

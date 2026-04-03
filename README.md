@@ -136,6 +136,72 @@ cd PM-Project
 5. 发布阶段：gate_review（上线评审）→ github-publish → post_launch_review（复盘）。
 6. 需要规范或模板时，读取对应 Skill 的 SKILL.md 与 references。
 
+## Figma → LVGL 接入说明
+
+仓库已内置：
+
+- `figma-to-lvgl` Skill：负责把 Figma 设计输入映射为 LVGL 页面模板、样式模板、组件映射表和资源清单
+- `figma_lvgl_designer` Agent：负责把设计输入结合目标 LVGL 工程结构做落地
+
+### 1. 配置 Remote Figma MCP Server
+
+在 `.codex/config.toml` 中配置 `mcp_servers.figma`：
+
+- 使用 **remote MCP server** 模式接入
+- 通过环境变量 `FIGMA_MCP_TOKEN` 注入访问令牌
+- 将示例 URL 替换为你实际部署的 Figma MCP Server 地址
+
+> 不要把 Figma token 直接写入仓库。
+
+### 2. 推荐输入
+
+优先提供以下信息：
+
+- `file_key`
+- `frame_id` 或 `node_id`
+- `export_assets`
+- `lvgl_version`（8.x / 9.x）
+- `target_resolution`（如 `480x480`）
+- `ui_path`
+
+若 MCP 不可用，可降级为：
+
+- Figma 链接
+- 导出截图 / 标注图
+- design tokens 文档
+
+### 3. 标准链路
+
+```text
+Figma 设计稿
+→ Remote Figma MCP Server
+→ 提取 frame / node tree / variables / styles / export assets
+→ figma-to-lvgl Skill
+→ 生成 LVGL 页面模板 / 样式模板 / 组件映射表 / 资源清单
+→ figma_lvgl_designer Agent
+→ 按目标 LVGL 工程目录落地
+```
+
+### 4. 最小验证示例
+
+建议先用一个最小页面验证链路是否打通：
+
+1. 选择一个单页面 Figma Frame
+2. 明确目标分辨率（如 `480x480`）
+3. 明确 LVGL 版本（如 `8.3` 或 `9.x`）
+4. 导出以下内容进行验证：
+   - 页面结构树
+   - design tokens
+   - export assets 清单
+   - 一套 LVGL 页面模板
+
+### 5. 约束与风险
+
+- LVGL 8.x 与 9.x API 存在差异，必须显式提供版本
+- 阴影、模糊、渐变、复杂动画不保证 1:1 还原
+- 优先导出 token、组件层级、图片资源引用，不建议一开始就追求完整业务逻辑
+- 若无法通过 MCP 读取 Figma 节点树，应退化为截图 / 标注驱动流程
+
 ## 项目文档
 
 - [CONTRIBUTING.md](CONTRIBUTING.md)：贡献方式、提交规范与新增 Agent/Skill 的约定。
