@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>开机动画原型导航</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #7a5cff;
+      --color-secondary: #00e5ff;
+      --color-accent: #ff3cac;
+      --color-surface: #0a0f1f;
+      --color-surface-alt: #121933;
+      --color-border: rgba(108, 145, 255, 0.24);
+      --color-text-primary: #eef4ff;
+      --color-text-secondary: #94a7d9;
+      --gradient-primary: linear-gradient(135deg, #7a5cff 0%, #00e5ff 60%, #ff3cac 100%);
+      --font-display: 'DM Sans', 'Noto Sans SC', sans-serif;
+      --font-body: 'Noto Sans SC', 'DM Sans', sans-serif;
+      --shadow-glow: 0 0 24px rgba(0, 229, 255, 0.18), 0 0 36px rgba(122, 92, 255, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      font-family: var(--font-body);
+      color: var(--color-text-primary);
+      background:
+        radial-gradient(circle at top left, rgba(122, 92, 255, 0.22), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(0, 229, 255, 0.16), transparent 25%),
+        #03050d;
+    }
+
+    .panel {
+      width: min(100%, 760px);
+      padding: 28px;
+      border-radius: 24px;
+      border: 1px solid var(--color-border);
+      background: linear-gradient(180deg, rgba(10, 15, 31, 0.92), rgba(7, 10, 20, 0.96));
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45), var(--shadow-glow);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-family: var(--font-display);
+      font-size: 28px;
+      letter-spacing: -0.02em;
+    }
+
+    .desc {
+      margin: 0 0 22px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .card {
+      display: grid;
+      gap: 12px;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--color-border);
+      background: rgba(18, 25, 51, 0.82);
+    }
+
+    .badge {
+      display: inline-flex;
+      width: fit-content;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.22);
+      color: var(--color-secondary);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .title {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .title strong {
+      font-size: 18px;
+    }
+
+    .meta {
+      color: var(--color-text-secondary);
+      font-size: 13px;
+    }
+
+    a {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 12px;
+      color: #fff;
+      text-decoration: none;
+      background: var(--gradient-primary);
+      font-weight: 600;
+      transition: transform 200ms ease, box-shadow 200ms ease;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
+    }
+
+    a:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <main class="panel">
+    <h1>开机动画高保真原型</h1>
+    <p class="desc">
+      本目录收录 320×240 嵌入式小屏的开机动画原型。视觉方向为赛博朋克风，重点呈现霓虹紫 / 蓝 / 青配色、扫描线、脉冲辉光、启动进度与状态文案。
+    </p>
+
+    <section class="card">
+      <span class="badge">Prototype</span>
+      <div class="title">
+        <strong>boot-animation-320x240.html</strong>
+        <span class="meta">固定画布：320×240 · 风格：赛博朋克启动界面</span>
+      </div>
+      <a href="./boot-animation-320x240.html">打开原型预览</a>
+    </section>
+  </main>
+</body>
+</html>
