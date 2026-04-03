@@ -143,7 +143,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/feature/c
 
 `--force` 会把冲突路径移动到 `.pm-project-backup/时间戳/` 后再继续执行，建议先确认目标项目中没有未处理的重要改动。
 
-以上示例使用当前接入分支 `feature/codex-cli-adaptation`，用于当前接入方案验证；正式团队落地时，建议切换到稳定分支或版本标签，并同步替换 URL 中的分支名。
+以上示例使用当前接入分支 `feature/codex-cli-adaptation`，用于当前接入方案验证；正式团队落地时，建议切换到稳定分支（如 `main`）或版本标签（如 `v1.0.0`），并同步替换 URL 中的分支名。
 
 如需预演执行过程，可运行：
 

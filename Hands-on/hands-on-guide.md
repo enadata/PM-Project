@@ -315,13 +315,15 @@ git checkout feature/codex-cli-adaptation
 
 #### 一键复用到其他项目
 
-如果你已经有一个业务项目，希望直接复用本仓库的 Agents / Skills，可在业务项目目录执行：
+如果你已经有一个业务项目，希望直接复用本仓库的 Agents / Skills，可先在业务项目目录执行基础接入命令：
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/feature/codex-cli-adaptation/bootstrap-pm-project.sh) --force
+bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/feature/codex-cli-adaptation/bootstrap-pm-project.sh)
 ```
 
-以上示例使用当前接入分支 `feature/codex-cli-adaptation`；若后续默认接入分支调整，请同步替换 URL 中的分支名。
+如目标项目中已存在同名文件或目录，再按需追加 `--force` 允许脚本先备份再覆盖。
+
+以上示例使用当前接入分支 `feature/codex-cli-adaptation`；正式团队落地时，建议切换到稳定分支（如 `main`）或版本标签（如 `v1.0.0`），并同步替换 URL 中的分支名。
 
 脚本会先通过 `git submodule add` 将 `https://github.com/enadata/PM-Project` 的 `feature/codex-cli-adaptation` 分支添加为当前项目下的 `.agent-project`，再自动接入 `AGENTS.md`、`.codex/agents`、`.codex/config.toml`、`.github/agents`、`.github/skills` 和 `.agents/skills`。其中 `.agents/skills` 会创建为指向 `../.github/skills` 的相对软链接，其余入口直接指向 `.agent-project` 下对应目录。如目标路径已存在，会先备份到 `.pm-project-backup/<timestamp>/`。目标项目需先完成 `git init` 或基于 Git 仓库创建。
 
