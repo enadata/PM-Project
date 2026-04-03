@@ -230,7 +230,7 @@ main() {
 
 本次接入方式：
 - 已将 $SUBMODULE_URL 的 $SUBMODULE_BRANCH 分支添加为 submodule：$SUBMODULE_PATH
-- agents / skills 相关入口已通过软链接指向 $SUBMODULE_PATH
+- Agents / Skills 相关入口已通过软链接指向 $SUBMODULE_PATH
 
 建议下一步：
 1. 查看 submodule 状态：
