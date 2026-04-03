@@ -7,7 +7,7 @@ FORCE=false
 DRY_RUN=false
 SUBMODULE_PATH=".agent-project"
 SUBMODULE_URL="https://github.com/enadata/PM-Project"
-SUBMODULE_BRANCH="feature/codex-cli-adaptation"
+SUBMODULE_BRANCH="project/codex-cli-adaptation"
 RAW_SCRIPT_URL="https://raw.githubusercontent.com/enadata/PM-Project/${SUBMODULE_BRANCH}/bootstrap-pm-project.sh"
 BACKUP_DIR_NAME=".pm-project-backup"
 
