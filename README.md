@@ -125,11 +125,16 @@ cd PM-Project
 
 ### 2.1 一键接入到任意项目
 
-如果你想在**任意已有项目**里直接复用本仓库的 Agents / Skills，可以在目标项目目录执行：
+如果你想在**任意已有项目**里直接复用本仓库的 Agents / Skills，可以在目标项目目录直接执行：
 
 ```bash
-cd /path/to/your-project
-bash /path/to/PM-Project/bootstrap-pm-project.sh --force
+bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/feature/codex-cli-adaptation/bootstrap-pm-project.sh) --force
+```
+
+如需预演执行过程，可运行：
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/feature/codex-cli-adaptation/bootstrap-pm-project.sh) --dry-run
 ```
 
 脚本会先执行以下接入动作：
@@ -148,7 +153,7 @@ bash /path/to/PM-Project/bootstrap-pm-project.sh --force
 
 其中 `.agents/skills` 会按当前项目目录结构创建为 `../.github/skills` 的相对软链接，其余入口会直接指向 `.agent-project` 下对应目录。
 
-如果目标路径已存在，脚本会在 `--force` 模式下先备份到 `.pm-project-backup/<timestamp>/`，再完成 submodule 与链接接入。目标项目需要先是一个 Git 仓库。
+如果目标路径已存在，脚本会在 `--force` 模式下先备份到 `.pm-project-backup/<timestamp>/`，再完成 submodule 与链接接入。目标项目需要先是一个 Git 仓库（如有需要先执行 `git init`）。
 
 ### 3. 推荐协作流程
 
