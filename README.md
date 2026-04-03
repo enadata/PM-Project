@@ -131,6 +131,8 @@ cd PM-Project
 bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/feature/codex-cli-adaptation/bootstrap-pm-project.sh) --force
 ```
 
+以上示例使用当前接入分支 `feature/codex-cli-adaptation`；若后续仓库默认接入分支调整，请同步替换 URL 中的分支名。
+
 如需预演执行过程，可运行：
 
 ```bash

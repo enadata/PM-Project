@@ -8,11 +8,12 @@ DRY_RUN=false
 SUBMODULE_PATH=".agent-project"
 SUBMODULE_URL="https://github.com/enadata/PM-Project"
 SUBMODULE_BRANCH="feature/codex-cli-adaptation"
+RAW_SCRIPT_URL="https://raw.githubusercontent.com/enadata/PM-Project/${SUBMODULE_BRANCH}/bootstrap-pm-project.sh"
 
 usage() {
-  cat <<'EOF'
+  cat <<EOF
 用法:
-  bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/feature/codex-cli-adaptation/bootstrap-pm-project.sh) [target_dir] [--force] [--dry-run]
+  bash <(curl -fsSL $RAW_SCRIPT_URL) [target_dir] [--force] [--dry-run]
 
 说明:
   在目标 Git 项目中，通过 git submodule add 接入 PM-Project 的
@@ -244,7 +245,7 @@ main() {
    - TAVILY_API_KEY
 
 如需预演执行过程，可运行：
-  bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/feature/codex-cli-adaptation/bootstrap-pm-project.sh) "$TARGET_DIR" --dry-run
+  bash <(curl -fsSL $RAW_SCRIPT_URL) "$TARGET_DIR" --dry-run
 EOF
 }
 
