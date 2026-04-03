@@ -129,13 +129,21 @@ cd PM-Project
 
 ### 2.1 一键接入到任意项目
 
-如果你想在**任意已有项目**里直接复用本仓库的 Agents / Skills，可以在目标项目目录直接执行：
+如果你想在**任意已有项目**里直接复用本仓库的 Agents / Skills，可以先在目标项目目录执行基础接入命令：
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/feature/codex-cli-adaptation/bootstrap-pm-project.sh)
+```
+
+如果目标项目中已存在同名文件或目录，再按需追加 `--force` 允许脚本先备份再覆盖：
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/feature/codex-cli-adaptation/bootstrap-pm-project.sh) --force
 ```
 
-以上示例使用当前接入分支 `feature/codex-cli-adaptation`；若后续仓库默认接入分支调整，请同步替换 URL 中的分支名。
+`--force` 会把冲突路径移动到 `.pm-project-backup/时间戳/` 后再继续执行，建议先确认目标项目中没有未处理的重要改动。
+
+以上示例使用当前接入分支 `feature/codex-cli-adaptation`，用于当前接入方案验证；正式团队落地时，建议切换到稳定分支或版本标签，并同步替换 URL 中的分支名。
 
 如需预演执行过程，可运行：
 

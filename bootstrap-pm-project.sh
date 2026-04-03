@@ -9,6 +9,7 @@ SUBMODULE_PATH=".agent-project"
 SUBMODULE_URL="https://github.com/enadata/PM-Project"
 SUBMODULE_BRANCH="feature/codex-cli-adaptation"
 RAW_SCRIPT_URL="https://raw.githubusercontent.com/enadata/PM-Project/${SUBMODULE_BRANCH}/bootstrap-pm-project.sh"
+BACKUP_DIR_NAME=".pm-project-backup"
 
 usage() {
   cat <<EOF
@@ -140,12 +141,27 @@ assert_target_repo() {
   fi
 }
 
+assert_clean_submodule_worktree() {
+  local submodule_abs="$1"
+
+  if [[ ! -d "$submodule_abs/.git" && ! -f "$submodule_abs/.git" ]]; then
+    return 0
+  fi
+
+  if [[ -n "$(git -C "$submodule_abs" status --short)" ]]; then
+    log "检测到 submodule 工作区存在未提交修改: $submodule_abs"
+    log "请先在 submodule 内提交或暂存修改后再执行更新。"
+    exit 1
+  fi
+}
+
 ensure_submodule() {
   local backup_root="$1"
   local submodule_abs="$TARGET_DIR/$SUBMODULE_PATH"
 
   if [[ -e "$submodule_abs" || -L "$submodule_abs" ]]; then
     if git -C "$TARGET_DIR" config --file .gitmodules --get "submodule.$SUBMODULE_PATH.path" >/dev/null 2>&1; then
+      assert_clean_submodule_worktree "$submodule_abs"
       run_cmd git -C "$TARGET_DIR" config -f .gitmodules "submodule.$SUBMODULE_PATH.url" "$SUBMODULE_URL"
       run_cmd git -C "$TARGET_DIR" config -f .gitmodules "submodule.$SUBMODULE_PATH.branch" "$SUBMODULE_BRANCH"
       run_cmd git -C "$TARGET_DIR" submodule sync "$SUBMODULE_PATH"
@@ -163,7 +179,10 @@ ensure_submodule() {
     backup_path "$submodule_abs" "$backup_root"
   fi
 
-  run_cmd git -C "$TARGET_DIR" submodule add -b "$SUBMODULE_BRANCH" "$SUBMODULE_URL" "$SUBMODULE_PATH"
+  if ! run_cmd git -C "$TARGET_DIR" submodule add -b "$SUBMODULE_BRANCH" "$SUBMODULE_URL" "$SUBMODULE_PATH"; then
+    log "submodule 添加失败，请检查网络连接和仓库 URL 是否正确。"
+    exit 1
+  fi
   announce "添加 submodule: $SUBMODULE_PATH -> $SUBMODULE_URL ($SUBMODULE_BRANCH)"
   run_cmd git -C "$TARGET_DIR" submodule update --init --remote "$SUBMODULE_PATH"
   announce "更新 submodule: $SUBMODULE_PATH"
@@ -208,7 +227,7 @@ main() {
   TARGET_DIR="$(cd "$TARGET_DIR" && pwd)"
   assert_target_repo
 
-  local backup_root="$TARGET_DIR/.pm-project-backup/$(date +%Y%m%d-%H%M%S)"
+  local backup_root="$TARGET_DIR/$BACKUP_DIR_NAME/$(date +%Y%m%d-%H%M%S)"
   local source_root="$TARGET_DIR/$SUBMODULE_PATH"
 
   log "目标项目: $TARGET_DIR"
