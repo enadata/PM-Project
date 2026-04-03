@@ -13,6 +13,16 @@ max_depth = 1
 # MCP 服务器配置
 # ============================================================
 
+# --- Figma MCP ---
+# 用于读取 Figma 文件、Frame/Node、Variables/Styles 和导出资源
+# 需要设置环境变量: FIGMA_MCP_TOKEN
+# 注意：请将 url 替换为你实际部署的 Remote Figma MCP Server 地址
+[mcp_servers.figma]
+url = "https://your-figma-mcp.example.com/mcp"
+bearer_token_env_var = "FIGMA_MCP_TOKEN"
+startup_timeout_sec = 20
+tool_timeout_sec = 60
+
 # --- 飞书 (Feishu) MCP ---
 # 用于文档查重、知识库检索、文档同步
 # 需要设置环境变量: FEISHU_MCP_UAT 或 FEISHU_MCP_TAT

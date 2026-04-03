@@ -21,6 +21,20 @@ LVGL 页面结构、样式、资源和事件方案
 可集成的代码与交付说明
 ```
 
+若仓库已配置 Remote Figma MCP Server，则优先升级为：
+
+```text
+Figma 设计稿
+    ↓
+Figma MCP（文件、Frame/Node、Variables/Styles、导出资源）
+    ↓
+设计拆解与组件映射
+    ↓
+LVGL 页面结构、样式、资源和事件方案
+    ↓
+可集成的代码与交付说明
+```
+
 ## 工作方式
 
 优先使用 `figma-to-lvgl` Skill 执行标注解析、组件映射和 LVGL 模板生成，再结合工程上下文完成代码落地。
@@ -36,13 +50,15 @@ LVGL 页面结构、样式、资源和事件方案
 ## 工作流
 
 1. 读取 `figma-to-lvgl` Skill 的 `SKILL.md`
-2. 收集 Figma 输入、目标分辨率、LVGL 版本和工程路径
-3. 产出设计拆解摘要、组件映射表和资源方案
-4. 生成或改造 LVGL 页面模板、样式模板和组件骨架代码
-5. 输出未完全还原项、工程降级方案和集成说明
+2. 优先收集 `file_key`、`frame_id` / `node_id`、`export_assets`、目标分辨率、LVGL 版本和工程路径
+3. 若已配置 `mcp_servers.figma`，优先通过 MCP 读取节点树、Variables / Styles 和资源范围
+4. 产出设计拆解摘要、组件映射表和资源方案
+5. 生成或改造 LVGL 页面模板、样式模板和组件骨架代码
+6. 输出未完全还原项、工程降级方案和集成说明，并标明输入来源（MCP / 链接 / 截图 / 标注）
 
 ## 快速命令
 
 - **"把这个 Figma 页面落到 LVGL"**：执行完整流程
+- **"通过 Figma MCP 读取 file key 并生成 LVGL 模板"**：优先走 MCP 链路
 - **"根据标注生成 LVGL 模板"**：聚焦模板和骨架代码生成
 - **"整理 Figma 到 LVGL 组件映射"**：只输出映射表和样式方案
