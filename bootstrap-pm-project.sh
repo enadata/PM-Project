@@ -12,7 +12,7 @@ SUBMODULE_BRANCH="feature/codex-cli-adaptation"
 usage() {
   cat <<'EOF'
 用法:
-  bash /path/to/PM-Project/bootstrap-pm-project.sh [target_dir] [--force] [--dry-run]
+  bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/feature/codex-cli-adaptation/bootstrap-pm-project.sh) [target_dir] [--force] [--dry-run]
 
 说明:
   在目标 Git 项目中，通过 git submodule add 接入 PM-Project 的
