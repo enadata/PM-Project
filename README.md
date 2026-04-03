@@ -127,6 +127,40 @@ cd PM-Project
 
 建议把这个仓库作为团队知识库维护，而不是把临时业务代码直接混入其中。
 
+### 2.1 一键接入到任意项目
+
+如果你想在**任意已有项目**里直接复用本仓库的 Agents / Skills，可以在目标项目目录直接执行：
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/feature/codex-cli-adaptation/bootstrap-pm-project.sh) --force
+```
+
+以上示例使用当前接入分支 `feature/codex-cli-adaptation`；若后续仓库默认接入分支调整，请同步替换 URL 中的分支名。
+
+如需预演执行过程，可运行：
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/feature/codex-cli-adaptation/bootstrap-pm-project.sh) --dry-run
+```
+
+脚本会先执行以下接入动作：
+
+- 使用 `git submodule add -b feature/codex-cli-adaptation https://github.com/enadata/PM-Project .agent-project`
+- 将本仓库作为目标项目内的 `.agent-project` submodule
+
+然后为目标项目创建以下软链接：
+
+- `AGENTS.md`
+- `.codex/agents`
+- `.codex/config.toml`
+- `.github/agents`
+- `.github/skills`
+- `.agents/skills`
+
+其中 `.agents/skills` 会创建为指向 `../.github/skills` 的相对软链接，其余入口会直接指向 `.agent-project` 下对应目录。
+
+如果目标路径已存在，脚本会在 `--force` 模式下先备份到 `.pm-project-backup/<timestamp>/`，再完成 submodule 与链接接入。目标项目需要先是一个 Git 仓库（如有需要先执行 `git init`）。
+
 ### 3. 推荐协作流程
 
 1. 先用 planning 或 new_employee_mentor 做任务识别和路由。
