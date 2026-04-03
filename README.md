@@ -153,7 +153,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/enadata/PM-Project/feature/c
 - `.github/skills`
 - `.agents/skills`
 
-其中 `.agents/skills` 会按当前项目目录结构创建为 `../.github/skills` 的相对软链接，其余入口会直接指向 `.agent-project` 下对应目录。
+其中 `.agents/skills` 会创建为指向 `../.github/skills` 的相对软链接，其余入口会直接指向 `.agent-project` 下对应目录。
 
 如果目标路径已存在，脚本会在 `--force` 模式下先备份到 `.pm-project-backup/<timestamp>/`，再完成 submodule 与链接接入。目标项目需要先是一个 Git 仓库（如有需要先执行 `git init`）。
 

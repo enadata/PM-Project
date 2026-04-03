@@ -135,7 +135,7 @@ parse_args() {
 assert_target_repo() {
   if ! git -C "$TARGET_DIR" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     log "目标目录不是 Git 仓库: $TARGET_DIR"
-    log "请先在目标项目执行 git init 或克隆已有仓库。"
+    log "请先在目标项目执行 git init 或克隆已有仓库，然后重新运行本脚本。"
     exit 1
   fi
 }
@@ -155,7 +155,7 @@ ensure_submodule() {
     fi
 
     if [[ "$FORCE" != true ]]; then
-      log "目标路径已存在且不是受管 submodule: $submodule_abs"
+      log "目标路径已存在，但不是当前脚本受管的 Git submodule: $submodule_abs"
       log "请使用 --force 允许脚本自动备份并重新创建。"
       exit 1
     fi
@@ -235,9 +235,9 @@ main() {
 
 建议下一步：
 1. 查看 submodule 状态：
-   git -C "$TARGET_DIR" submodule status
+   cd "$TARGET_DIR" && git submodule status
 2. 确认软链接：
-   ls -l "$TARGET_DIR/.codex" "$TARGET_DIR/.github" "$TARGET_DIR/.agents"
+   cd "$TARGET_DIR" && ls -l .codex .github .agents
 3. 按需配置环境变量：
    - MODAO_TOKEN
    - FEISHU_MCP_UAT / FEISHU_MCP_TAT
