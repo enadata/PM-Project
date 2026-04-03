@@ -313,6 +313,17 @@ cd PM-Project
 git checkout feature/codex-cli-adaptation
 ```
 
+#### 一键复用到其他项目
+
+如果你已经有一个业务项目，希望直接复用本仓库的 Agents / Skills，可在业务项目目录执行：
+
+```bash
+cd /path/to/your-project
+bash /path/to/PM-Project/bootstrap-pm-project.sh --force
+```
+
+脚本会自动为当前项目接入 `AGENTS.md`、`.codex/agents`、`.codex/config.toml`、`.github/agents`、`.github/skills` 和 `.agents/skills`；如目标路径已存在，会先备份到 `.pm-project-backup/<timestamp>/`。
+
 #### 确认仓库结构
 
 克隆完成后，确认关键文件存在：

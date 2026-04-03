@@ -123,6 +123,26 @@ cd PM-Project
 
 建议把这个仓库作为团队知识库维护，而不是把临时业务代码直接混入其中。
 
+### 2.1 一键接入到任意项目
+
+如果你想在**任意已有项目**里直接复用本仓库的 Agents / Skills，可以在目标项目目录执行：
+
+```bash
+cd /path/to/your-project
+bash /path/to/PM-Project/bootstrap-pm-project.sh --force
+```
+
+脚本会为目标项目创建以下软链接：
+
+- `AGENTS.md`
+- `.codex/agents`
+- `.codex/config.toml`
+- `.github/agents`
+- `.github/skills`
+- `.agents/skills`
+
+如果目标路径已存在，脚本会在 `--force` 模式下先备份到 `.pm-project-backup/<timestamp>/`，再完成链接。
+
 ### 3. 推荐协作流程
 
 1. 先用 planning 或 new_employee_mentor 做任务识别和路由。
