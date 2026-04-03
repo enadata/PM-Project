@@ -18,6 +18,7 @@ max_depth = 1
 # 需要设置环境变量: FIGMA_MCP_TOKEN
 # 注意：请将 url 替换为你实际部署或已托管的 Remote Figma MCP Server 地址
 # 若尚未部署，请先查阅你选用的 Figma MCP Server 项目文档，确认部署方式、认证要求和 /mcp 入口地址
+# 若使用开源 Figma MCP Server 实现，请以其官方部署文档中的实际端点路径为准，不要假设一定使用 /mcp
 [mcp_servers.figma]
 url = "https://your-figma-mcp.example.com/mcp"
 bearer_token_env_var = "FIGMA_MCP_TOKEN"
