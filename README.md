@@ -132,7 +132,12 @@ cd /path/to/your-project
 bash /path/to/PM-Project/bootstrap-pm-project.sh --force
 ```
 
-脚本会为目标项目创建以下软链接：
+脚本会先执行以下接入动作：
+
+- 使用 `git submodule add -b feature/codex-cli-adaptation https://github.com/enadata/PM-Project .agent-project`
+- 将本仓库作为目标项目内的 `.agent-project` submodule
+
+然后为目标项目创建以下软链接：
 
 - `AGENTS.md`
 - `.codex/agents`
@@ -141,7 +146,7 @@ bash /path/to/PM-Project/bootstrap-pm-project.sh --force
 - `.github/skills`
 - `.agents/skills`
 
-如果目标路径已存在，脚本会在 `--force` 模式下先备份到 `.pm-project-backup/<timestamp>/`，再完成链接。
+如果目标路径已存在，脚本会在 `--force` 模式下先备份到 `.pm-project-backup/<timestamp>/`，再完成 submodule 与链接接入。目标项目需要先是一个 Git 仓库。
 
 ### 3. 推荐协作流程
 
