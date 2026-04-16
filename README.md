@@ -60,7 +60,8 @@
 │       ├── prototype-design/
 │       ├── requirement-doc/
 │       ├── requirement-to-issues/
-│       └── security-audit/
+│       ├── security-audit/
+│       └── zread/
 ├── docs/
 │   └── custom-agents-skills-matrix.md
 ├── plans/
@@ -107,6 +108,7 @@
 | playwright-testing | 沉淀 Playwright UI 测试规范 |
 | security-audit | 基于 OWASP 做安全审查 |
 | architect | 提供系统设计模板与架构方法 |
+| zread | 使用 zread CLI 生成和读取仓库 Wiki 式知识库 |
 
 ## 使用方式
 

@@ -67,6 +67,7 @@ Skill 存放在 `.agents/skills/`（指向 `.github/skills/` 的符号链接）�
 | `requirement-doc` | PRD 生成（支持模块化：主 PRD + Module PRD） |
 | `requirement-to-issues` | PRD 转 GitHub Issues（Epic 模块 + Task 功能点） |
 | `security-audit` | OWASP Top 10 安全审查 |
+| `zread` | 使用 zread CLI 生成和读取仓库 Wiki 式知识库 |
 
 ## MCP 服务依赖
 

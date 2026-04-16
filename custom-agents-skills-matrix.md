@@ -49,6 +49,7 @@
 | `security-audit` | `.agents/skills/security-audit/` | OWASP 安全审查 | 安全专项检查 |
 | `microservices` | `.agents/skills/microservices/` | 微服务设计与部署规范 | 架构设计、部署方案详设 |
 | `playwright-testing` | `.agents/skills/playwright-testing/` | Playwright 测试规范 | `code_testing` / `ui_testing` 的规范基线 |
+| `zread` | `.agents/skills/zread/` | 使用 zread CLI 生成和读取仓库 Wiki 式知识库 | 仓库理解、项目概览、代码库 Wiki 生成与消费 |
 
 ## 推荐调用顺序
 
